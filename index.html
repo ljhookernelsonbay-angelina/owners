@@ -161,18 +161,17 @@ footer{font-size:13px;color:var(--tint);margin-top:32px;max-width:48em}
 
 <section id="enquire">
 <h2>Owner enquiry form</h2>
-<div class="form">
-<label>Your name<input id="f-name" autocomplete="name"></label>
-<label>Email<input id="f-email" type="email" autocomplete="email"></label>
-<label>Phone<input id="f-phone" type="tel" autocomplete="tel"></label>
-<label>Apartment number or level<input id="f-apt"></label>
-<label class="wide">What can we help with?<select id="f-topic"><option>Permanent rental management</option><option>Holiday rental management</option><option>Something else</option></select></label>
-<label class="wide chk"><span><input type="checkbox" id="f-r1" data-t="Please provide a written rental estimate for my apartment."> Please provide a written rental estimate for my apartment.</span><span><input type="checkbox" id="f-r2" data-t="Please provide information regarding fees and charges."> Please provide information regarding fees and charges.</span></label>
-<label class="wide">Message<textarea id="f-msg" rows="5"></textarea></label>
-<p class="small wide">Sending opens an email to us with your details filled in, ready for you to send.</p>
-<p class="err" id="f-err" role="alert" hidden></p>
-<a class="btn dl" id="f-send" href="mailto:nelsonbay@ljhooker.com.au">Send enquiry</a>
-</div>
+<form class="form" action="https://formspree.io/f/xaeobrwl" method="post">
+<label>Your name<input id="f-name" name="name" required autocomplete="name"></label>
+<label>Email<input id="f-email" name="email" required type="email" autocomplete="email"></label>
+<label>Phone<input id="f-phone" name="phone" type="tel" autocomplete="tel"></label>
+<label>Apartment number or level<input id="f-apt" name="apartment"></label>
+<label class="wide">What can we help with?<select id="f-topic" name="topic"><option>Permanent rental management</option><option>Holiday rental management</option><option>Something else</option></select></label>
+<label class="wide chk"><span><input type="checkbox" id="f-r1" name="written_rental_estimate" value="Please provide a written rental estimate for my apartment."> Please provide a written rental estimate for my apartment.</span><span><input type="checkbox" id="f-r2" name="fees_and_charges" value="Please provide information regarding fees and charges."> Please provide information regarding fees and charges.</span></label>
+<label class="wide">Message<textarea id="f-msg" name="message" rows="5"></textarea></label>
+<p class="small wide">Your enquiry will be sent to LJ Hooker Nelson Bay via Formspree.</p>
+<button class="btn dl" type="submit">Send enquiry</button>
+</form>
 </section>
 
 <div class="contact" id="contact"><div>
@@ -190,12 +189,6 @@ footer{font-size:13px;color:var(--tint);margin-top:32px;max-width:48em}
 <script>
 document.querySelectorAll('[role=tab]').forEach(function(t){t.addEventListener('click',function(){
 document.querySelectorAll('[role=tab]').forEach(function(o){var on=o===t;o.setAttribute('aria-selected',on);document.getElementById(o.getAttribute('aria-controls')).hidden=!on})})});
-(function(){var b=document.getElementById('f-send');if(!b)return;
-function v(i){return document.getElementById(i).value.trim()}
-function reqs(){var r=[];['f-r1','f-r2'].forEach(function(i){var e=document.getElementById(i);if(e.checked)r.push('- '+e.getAttribute('data-t'))});return r.length?r.join('\n'):'None selected'}
-function build(){var body='Name: '+v('f-name')+'\nEmail: '+v('f-email')+'\nPhone: '+v('f-phone')+'\nApartment: '+v('f-apt')+'\nTopic: '+v('f-topic')+'\nRequests:\n'+reqs()+'\n\n'+v('f-msg');
-b.href='mailto:nelsonbay@ljhooker.com.au?subject='+encodeURIComponent('Angelina owner enquiry: '+v('f-topic'))+'&body='+encodeURIComponent(body)}
-b.addEventListener('click',function(e){var err=document.getElementById('f-err');if(!(v('f-name')&&/.+@.+\..+/.test(v('f-email')))){e.preventDefault();err.textContent='Please add your name and a valid email so we can reply.';err.hidden=false;return}err.hidden=true;build()})})();
 document.querySelectorAll('.fx button').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.fx button').forEach(function(o){o.setAttribute('aria-selected',o===t)});document.querySelectorAll('.card').forEach(function(c){c.hidden=c.getAttribute('data-cat')!==t.getAttribute('data-cat')})})});
 </script>
 </body>
